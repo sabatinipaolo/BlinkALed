@@ -10,12 +10,18 @@
 
 void setup() {
     pinMode(LED_PIN, OUTPUT);
-    digitalWrite(LED_PIN, HIGH); // su molte board PC13 è active-low -> HIGH = LED spento
 }
 
 void loop() {
-    digitalWrite(LED_PIN, LOW);  // LED acceso
+    
+  for (volatile int i = 0; i < 1024; i+=16){
+    analogWrite (LED_PIN, i); 
     delay(500);
-    digitalWrite(LED_PIN, HIGH); // LED spento
+  } 
+  
+  for (volatile int i = 1023; i > 0; i-=16){
+    analogWrite (LED_PIN, i); 
     delay(500);
+  }
+
 }
