@@ -6,7 +6,7 @@
     #define LED_PIN LED_BUILTIN
 #endif
 
-
+#define LED_PIN PA10
 
 void setup() {
     pinMode(LED_PIN, OUTPUT);
