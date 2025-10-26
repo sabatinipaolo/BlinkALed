@@ -3,12 +3,28 @@
 
 #include <Arduino.h>
 
+#define AD_PIN_A PA_2
+#define AD_PIN_B PA_3
+
+#define AS_PIN_A PA_0
+#define AS_PIN_B PA_1
+
+#define PD_PIN_A PB_7
+#define PD_PIN_B PB_8
+
+#define PS_PIN_A PA_6
+#define PS_PIN_B PA_7
+
+
 class Motore
 {
 public:
     Motore(int pinA, int pinB);
     void orario(int pwm);
     void antiorario(int pwm);
+    void stop();
+    void muovi(int pwm);
+
 
 private:
     int _pinA;
@@ -21,6 +37,7 @@ Motore::Motore(int pinA, int pinB)
     pinMode(_pinA, OUTPUT);
     pinMode(_pinB, OUTPUT);
 };
+
 void Motore::orario(int pwm)
 {
     analogWrite(_pinA, pwm);
@@ -32,4 +49,28 @@ void Motore::antiorario(int pwm)
     analogWrite(_pinB, pwm);
 }
 
+void Motore::stop()
+{
+    analogWrite(_pinA, LOW);
+    analogWrite(_pinB, LOW);
+}
+
+void Motore::muovi(int velocita)
+{
+    
+
+    if (velocita > 0)
+    {   int pwm = map(  velocita, 0,100, 150, 255);
+        orario(pwm);
+    }
+    else if (velocita < 0)
+    {   
+        int pwm = map(  -velocita, 0,100, 150, 255);
+        antiorario(-pwm);
+    }
+    else
+    {
+        stop();
+    }
+}
 #endif // MOTORI_H
