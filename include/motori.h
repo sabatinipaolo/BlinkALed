@@ -25,6 +25,7 @@ public:
     void stop();
     void muovi(int pwm);
 
+    void test_avanti_indietro(int pwm);
 
 private:
     int _pinA;
@@ -60,12 +61,12 @@ void Motore::muovi(int velocita)
     
 
     if (velocita > 0)
-    {   int pwm = map(  velocita, 0,100, 150, 255);
+    {   int pwm = map(  velocita, 0,255, 0, 255);
         orario(pwm);
     }
     else if (velocita < 0)
     {   
-        int pwm = map(  -velocita, 0,100, 150, 255);
+        int pwm = map(  -velocita, 0,255, 0, 255);
         antiorario(-pwm);
     }
     else
@@ -73,4 +74,17 @@ void Motore::muovi(int velocita)
         stop();
     }
 }
+
+void Motore::test_avanti_indietro(int pwm){ 
+    orario(pwm);
+    delay (2000);
+    stop();
+    delay (1000);
+    antiorario(pwm);
+    delay (2000);
+    stop();
+    delay (1000);
+
+}
+
 #endif // MOTORI_H

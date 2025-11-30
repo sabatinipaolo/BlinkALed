@@ -17,11 +17,13 @@ public:
     
     
 
-private:
+
     Motore _mot_ant_dx;
     Motore _mot_ant_sx;
     Motore _mot_post_dx;
     Motore _mot_post_sx;
+    
+    private:
     void test_motore(Motore & motore);
 };
 
@@ -83,13 +85,13 @@ void Robot::test_PAD()
 
 void Robot::test_motore( Motore &motore){
     motore.muovi(100);
-    delay(2000);
-    motore.stop();
-    delay(500);
-    motore.muovi(-100);
-    delay(2000);
-    motore.stop();
-    delay(5500);
+    // delay(2000);
+    // motore.stop();
+    // delay(500);
+    // motore.muovi(-100);
+    // delay(2000);
+    // motore.stop();
+    // delay(5500);
 
 }
 #endif // ROBOT_H
