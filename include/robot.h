@@ -2,6 +2,8 @@
 #define ROBOT_H
 
 #include "motori.h"
+constexpr double radice2_su2 = 0.70710678118654752440084436210485;
+constexpr double quarantacinque = 0.78539816339744830961566084581988;
 
 
 class Robot {
@@ -40,15 +42,16 @@ Robot::Robot()
 void Robot::trasla(int alfa, int velocita) 
 {
 
-    double cosa = cos(alfa * 3.14159 / 180.0);
-    double sina = sin(alfa * 3.14159 / 180.0);
-    double radice2_su2 = 1.41421 / 2.0;
+    double cosa = cos(alfa + quarantacinque);
+    double sina = sin(alfa + quarantacinque);
 
-    int vas = static_cast<int>(-velocita * radice2_su2*(cosa + sina));
-    int vad = static_cast<int>(velocita * radice2_su2*(cosa - sina));
-    int vpd = -vas;
+    
+    int vad = static_cast<int>(-velocita * radice2_su2*sina);
     int vps = -vad;
-
+    
+    int vas = static_cast<int>(velocita * radice2_su2*cosa );
+    int vpd = -vas;
+    
     _mot_ant_dx.muovi(vad);
     _mot_post_dx.muovi(vpd);
     _mot_ant_sx.muovi(vas);
