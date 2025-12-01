@@ -31,7 +31,10 @@ void setup()
   // display.print("CO2: ");
   // display.print("VOC: ");
   // display.display();
-
+        _mot_ant_dx .antiorario(200);
+        _mot_ant_sx .antiorario(200);
+        _mot_post_dx.antiorario(200);
+        _mot_post_sx.antiorario(200);
  
 
 }
