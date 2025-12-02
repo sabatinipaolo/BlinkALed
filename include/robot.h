@@ -9,8 +9,9 @@ constexpr double quarantacinque = 0.78539816339744830961566084581988;
 class Robot {
 public:
     Robot();
-    void trasla(int alfa, int velocita); 
-    void stop() ;
+    void trasla_alla_massima_velocita(int alfa);
+    void trasla(int alfa, int velocita);
+    void stop();
 
     void muovi_nord_est(int velocita);
     void muovi_sud_ovest(int velocita);
@@ -20,10 +21,10 @@ public:
     void muovi_nord_ovest(int velocita);
 
     Motore  motori[4] ;
-    Motore _mot_ant_dx;
-    Motore _mot_ant_sx;
-    Motore _mot_pos_dx;
-    Motore _mot_pos_sx;
+    Motore& _mot_ant_dx;
+    Motore& _mot_ant_sx;
+    Motore& _mot_pos_dx;
+    Motore& _mot_pos_sx;
     
  
     void test_motori();
@@ -45,6 +46,11 @@ Robot::Robot()
     
 {
     stop();
+}
+
+void Robot::trasla_alla_massima_velocita(int alfa) 
+{
+    
 }
 void Robot::trasla(int alfa, int velocita) 
 {
@@ -80,6 +86,7 @@ void Robot::muovi_nord_est(int velocita)
     _mot_ant_sx.muovi(-velocita);
     _mot_pos_sx.stop();
 }
+
 void Robot::muovi_sud_ovest(int velocita)
 {
     muovi_nord_est(-velocita);
