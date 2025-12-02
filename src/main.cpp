@@ -29,7 +29,8 @@ void setup()
   // display.print("VOC: ");
   // display.display();
 
-  robot.muovi_nord_est(100);
+  robot.trasla(0,100);
+  robot.trasla(90,100);
 
 }
 void loop()

@@ -2,15 +2,16 @@
 #define ROBOT_H
 
 #include "motori.h"
-constexpr double radice2_su2 = 0.70710678118654752440084436210485;
-constexpr double quarantacinque = 0.78539816339744830961566084581988;
 
+constexpr float radice2_su2 = 0.70710678118654752440084436210485;
+constexpr float pi = 3.14159265358979323846;
+constexpr float quarantacinque = 45 * PI /180;
 
 class Robot {
 public:
     Robot();
     void trasla_alla_massima_velocita(int alfa);
-    void trasla(int alfa, int velocita);
+    void trasla(float alfa, int velocita);
     void stop();
 
     void muovi_nord_est(int velocita);
@@ -52,11 +53,11 @@ void Robot::trasla_alla_massima_velocita(int alfa)
 {
     
 }
-void Robot::trasla(int alfa, int velocita) 
+void Robot::trasla(float alfa, int velocita) 
 {
 
-    double cosa = cos(alfa + quarantacinque);
-    double sina = sin(alfa + quarantacinque);
+    float cosa = cos(alfa + quarantacinque);
+    float sina = sin(alfa + quarantacinque);
 
     
     int vad = static_cast<int>(-velocita * radice2_su2*sina);
