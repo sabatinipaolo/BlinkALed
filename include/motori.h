@@ -15,6 +15,7 @@
 #define PS_PIN_A PA_6
 #define PS_PIN_B PA_7
 
+#define MIN_PWM  80
 
 class Motore
 {
@@ -61,12 +62,12 @@ void Motore::muovi(int velocita)
     
 
     if (velocita > 0)
-    {   int pwm = map(  velocita, 0,255, 0, 255);
+    {   int pwm = map(  velocita, 0,100, MIN_PWM, 255);
         orario(pwm);
     }
     else if (velocita < 0)
     {   
-        int pwm = map(  -velocita, 0,255, 0, 255);
+        int pwm = map(  -velocita, 0,100, MIN_PWM, 255);
         antiorario(-pwm);
     }
     else
