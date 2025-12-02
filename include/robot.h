@@ -11,34 +11,41 @@ public:
     Robot();
     void trasla(int alfa, int velocita); 
     void stop() ;
-    void test_MAD();    
-    void test_MAS();
-    void test_PAD();
-    void test_PAS();
-    
-    
-    
 
+    void muovi_nord_est(int velocita);
+    void muovi_sud_ovest(int velocita);
 
+    void muovi_sud_est(int velocita);
+
+    void muovi_nord_ovest(int velocita);
+
+    Motore  motori[4] ;
     Motore _mot_ant_dx;
     Motore _mot_ant_sx;
-    Motore _mot_post_dx;
-    Motore _mot_post_sx;
+    Motore _mot_pos_dx;
+    Motore _mot_pos_sx;
     
-    private:
-    void test_motore(Motore & motore);
+ 
+    void test_motori();
 };
 
 
-Robot::Robot() 
-    :   _mot_ant_dx(AD_PIN_A, AD_PIN_B),
-        _mot_ant_sx(AS_PIN_A, AS_PIN_B),
-        _mot_post_dx(PD_PIN_A, PD_PIN_B),
-        _mot_post_sx(PS_PIN_A, PS_PIN_B)
+
+Robot::Robot()
+    : motori{ Motore(AD_PIN_A, AD_PIN_B),
+              Motore(PD_PIN_A, PD_PIN_B),
+              Motore(PS_PIN_A, PS_PIN_B),
+              Motore(AS_PIN_A, AS_PIN_B)
+             
+               },
+      _mot_ant_dx(motori[0]),
+      _mot_pos_dx(motori[1]),
+      _mot_pos_sx(motori[2]),
+      _mot_ant_sx(motori[3])
+    
 {
     stop();
 }
-
 void Robot::trasla(int alfa, int velocita) 
 {
 
@@ -53,48 +60,49 @@ void Robot::trasla(int alfa, int velocita)
     int vpd = -vas;
     
     _mot_ant_dx.muovi(vad);
-    _mot_post_dx.muovi(vpd);
+    _mot_pos_dx.muovi(vpd);
     _mot_ant_sx.muovi(vas);
-    _mot_post_sx.muovi(vps);
+    _mot_pos_sx.muovi(vps);
 }
 
 void Robot::stop() 
 {
     _mot_ant_dx.stop();
-    _mot_post_dx.stop();
+    _mot_pos_dx.stop();
     _mot_ant_sx.stop();
-    _mot_post_sx.stop();
+    _mot_pos_sx.stop();
 }
 
-void Robot::test_MAD() 
+void Robot::muovi_nord_est(int velocita)
 {
-    test_motore( _mot_ant_dx);
+    _mot_ant_dx.stop();
+    _mot_pos_dx.muovi(velocita);
+    _mot_ant_sx.muovi(-velocita);
+    _mot_pos_sx.stop();
 }
-
-void Robot::test_MAS() 
+void Robot::muovi_sud_ovest(int velocita)
 {
-    test_motore( _mot_ant_sx);
+    muovi_nord_est(-velocita);
 }
-void Robot::test_PAS() 
+
+void Robot::muovi_sud_est(int velocita)
 {
-    test_motore( _mot_post_sx);
+    _mot_ant_dx.muovi(-velocita);
+    _mot_pos_dx.stop();
+    _mot_ant_sx.stop();
+    _mot_pos_sx.muovi(velocita);
 }
 
-void Robot::test_PAD() 
+void Robot::muovi_nord_ovest(int velocita)
 {
-    test_motore( _mot_post_dx);
+    muovi_sud_est(-velocita);
 }
 
-
-void Robot::test_motore( Motore &motore){
-    motore.muovi(100);
-    // delay(2000);
-    // motore.stop();
-    // delay(500);
-    // motore.muovi(-100);
-    // delay(2000);
-    // motore.stop();
-    // delay(5500);
-
+void Robot::test_motori()
+{
+    for (int i = 0; i < 4; i++)
+    {
+        motori[i].test_avanti_indietro(200);
+    }
 }
 #endif // ROBOT_H

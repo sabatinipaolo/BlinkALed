@@ -2,11 +2,8 @@
 #include "robot.h"
 //#include <Adafruit_SSD1306.h>
 
-//Robot robot; 
-        Motore _mot_ant_dx(AD_PIN_A, AD_PIN_B) ;
-        Motore _mot_ant_sx(AS_PIN_A, AS_PIN_B) ;
-        Motore _mot_post_dx(PD_PIN_A, PD_PIN_B);
-        Motore _mot_post_sx(PS_PIN_A, PS_PIN_B);
+Robot robot; 
+
 
 //Adafruit_SSD1306 display = Adafruit_SSD1306();
 void setup()
@@ -31,16 +28,31 @@ void setup()
   // display.print("CO2: ");
   // display.print("VOC: ");
   // display.display();
-        _mot_ant_dx .antiorario(200);
-        _mot_ant_sx .antiorario(200);
-        _mot_post_dx.antiorario(200);
-        _mot_post_sx.antiorario(200);
- 
+
+  robot.muovi_nord_est(100);
 
 }
-
 void loop()
 {
-  
-  
+
+
+  // robot.muovi_nord_est(100);
+  // delay(500);
+  // robot.stop();
+  // delay(500);
+
+  // robot.muovi_sud_est(100);
+  // delay(500);
+  // robot.stop();
+  // delay(500);
+
+  // robot.muovi_sud_ovest(100);
+  // delay(500);
+  // robot.stop();
+  // delay(500);
+
+  // robot.muovi_nord_ovest(100);
+  // delay(500);
+  // robot.stop();
+  // delay(500);
 }
